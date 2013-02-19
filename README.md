@@ -32,7 +32,9 @@ implementation versions.
 
 RedCard provides an API for specifying multiple implementations and versions.
 
-    RedCard.check *requirements
+```ruby
+RedCard.check *requirements
+```
 
 The parameter, requirements, is an Array of Symbols or Strings with an
 optional final Hash of implementations as keys and implementation versions as
@@ -40,18 +42,19 @@ values.
 
 The following examples illustrate this:
 
-    # Requires any version JRuby or Rubinius
-    RedCard.check :rubinius, :jruby
+```ruby
+# Requires any version JRuby or Rubinius
+RedCard.check :rubinius, :jruby
 
-    # Requires Ruby language 1.9 and MRI or Rubinius
-    RedCard.check :mri, :rubinius, "1.9"
+# Requires Ruby language 1.9 and MRI or Rubinius
+RedCard.check :mri, :rubinius, "1.9"
 
-    # Requires Ruby language 1.9.3 or 2.0
-    RedCard.check "1.9.3", "2.0"
+# Requires Ruby language 1.9.3 or 2.0
+RedCard.check "1.9.3", "2.0"
 
-    # Requires Ruby language 1.9 and Rubinius version 2.0
-    RedCard.check "1.9", :rubinius => "2.0"
-
+# Requires Ruby language 1.9 and Rubinius version 2.0
+RedCard.check "1.9", :rubinius => "2.0"
+```
 
 ## Be Conservative
 
@@ -61,13 +64,14 @@ version, implementation, and implementation version.
 
 The following examples illustrate this:
 
-    # Requires at minimum Ruby version 1.9 but accepts anything greater
-    require 'redcard/1.9'
+```ruby
+# Requires at minimum Ruby version 1.9 but accepts anything greater
+require 'redcard/1.9'
 
-    # Requires Rubinius 2.0
-    require 'redcard/rubinius/2.0'
+# Requires Rubinius 2.0
+require 'redcard/rubinius/2.0'
 
-    # Requires Ruby 1.9 and Rubinius
-    require 'redcard/1.9'
-    require 'redcard/rubinius'
-
+# Requires Ruby 1.9 and Rubinius
+require 'redcard/1.9'
+require 'redcard/rubinius'
+```
