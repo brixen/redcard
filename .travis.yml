@@ -1,5 +1,7 @@
 language: ruby
-script: RUBYLIB=lib bundle exec rspec
+env:
+  - RUBYLIB=lib
+script: bundle exec rspec
 rvm:
   - 1.8.7
   - 1.9.2
