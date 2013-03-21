@@ -28,8 +28,10 @@ class RedCard
       # TODO
     when "jruby"
       Object.const_get :JRUBY_VERSION
-    # when "maglev"
-      # TODO
+    when "maglev"
+      if defined?(::Maglev)
+        Object.const_get(:MAGLEV_VERSION)
+      end
     when "rbx"
       if defined?(::Rubinius)
         Object.const_get(:Rubinius).const_get(:VERSION)
