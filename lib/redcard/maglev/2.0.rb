@@ -1,3 +1,3 @@
 require 'redcard'
 
-RedCard.verify :maglev => "2.0"
+RedCard.verify "1.9.3", :maglev => "2.0"
