@@ -48,8 +48,8 @@ class RedCard
         # TODO
       when "jruby"
         Object.const_set :JRUBY_VERSION, version
-      # when "maglev"
-        # TODO
+      when "maglev"
+        Object.const_set :MAGLEV_VERSION, version
       when "rbx"
         unless defined?(::Rubinius)
           Object.const_set :Rubinius, Module.new
