@@ -17,12 +17,11 @@ RedCard provides a standard way to ensure that the running Ruby implementation
 matches the desired language version, implementation, and implementation
 version.
                       EOS
-  gem.has_rdoc                  = true
-  gem.extra_rdoc_files          = %w[ README.md LICENSE ]
+  gem.has_rdoc          = true
+  gem.extra_rdoc_files  = %w[ README.md LICENSE ]
   gem.rubygems_version  = %q{1.3.5}
-  gem.rubyforge_project         = 'http://rubyforge.org/projects/mspec'
 
-  gem.rdoc_options  << '--title' << 'MSpec Gem' <<
+  gem.rdoc_options  << '--title' << 'RedCard Gem' <<
                     '--main' << 'README' <<
                     '--line-numbers'
 
