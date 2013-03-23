@@ -18,9 +18,6 @@ class RedCard
       $VERBOSE = nil
       @ruby_version = RUBY_VERSION
       @ruby_engine = RedCard.engine
-    end
-
-    def self.save_engine_version
       @engine_version = RedCard.engine_version
     end
 
@@ -28,7 +25,7 @@ class RedCard
       $VERBOSE = nil
       Object.const_set :RUBY_VERSION, @ruby_version
 
-      engine_version = @engine_version ? @engine_version : nil
+      engine_version = @engine_version
       Object.const_set :RUBY_ENGINE, @ruby_engine
 
       $VERBOSE = @verbose
@@ -42,26 +39,39 @@ class RedCard
       Object.const_set :RUBY_ENGINE, engine
     end
 
+    # When version is nil, we unset the constant for that Ruby engine.
     def self.engine_version=(version)
       case RedCard.engine
       # when "ironruby"
         # TODO
       when "jruby"
-        Object.const_set :JRUBY_VERSION, version
-      when "maglev"
-        Object.const_set :MAGLEV_VERSION, version
-      when "rbx"
-        unless defined?(::Rubinius)
-          Object.const_set :Rubinius, Module.new
+        if version
+          Object.const_set :JRUBY_VERSION, version
+        else
+          Object.send :remove_const, :JRUBY_VERSION
         end
-        Object.const_get(:Rubinius).const_set(:VERSION, version)
+      when "maglev"
+        if version
+          Object.const_set :MAGLEV_VERSION, version
+        else
+          Object.send :remove_const, :MAGLEV_VERSION
+        end
+      when "rbx"
+        if version
+          Object.const_set :Rubinius, Module.new unless defined?(::Rubinius)
+          Object.const_get(:Rubinius).const_set(:VERSION, version)
+        else
+          Object.send :remove_const, :Rubinius
+        end
       when "ruby"
         RUBY_VERSION
       when "topaz"
-        unless defined?(::Topaz)
-          Object.const_set :Topaz, Module.new
+        if version
+          Object.const_set :Topaz, Module.new unless defined?(::Topaz)
+          Object.const_get(:Topaz).const_set(:VERSION, version)
+        else
+          Object.send :remove_const, :Topaz
         end
-        Object.const_get(:Topaz).const_set(:VERSION, version)
       end
     end
   end
@@ -84,11 +94,7 @@ def redcard_version(version)
   RedCard::Specs.version = version
 end
 
-def redcard_engine(engine)
+def redcard_engine_version(engine, version)
   RedCard::Specs.engine = engine
-end
-
-def redcard_engine_version(version)
-  RedCard::Specs.save_engine_version
   RedCard::Specs.engine_version = version
 end

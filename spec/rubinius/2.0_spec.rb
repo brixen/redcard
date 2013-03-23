@@ -11,20 +11,17 @@ describe "Rubinius version requirement" do
   end
 
   it "succeeds if RUBY_ENGINE is 'rbx' and Rubinius::VERSION is greater than or equal to 2.0" do
-    redcard_engine "rbx"
-    redcard_engine_version "2.0.0"
+    redcard_engine_version "rbx", "2.0.0"
     expect { require 'redcard/rubinius/2.0' }.not_to raise_error
   end
 
   it "raises an InvalidRubyEngineError if RUBY_ENGINE is 'topaz'" do
-    redcard_engine "topaz"
-    redcard_engine_version "2.0.0"
+    redcard_engine_version "topaz", "2.0.0"
     expect { require 'redcard/rubinius/2.0' }.to raise_error(RedCard::InvalidRubyError)
   end
 
   it "raises an InvalidEngineVersionError if Rubinius::VERSION is less than 2.0" do
-    redcard_engine "rbx"
-    redcard_engine_version "1.2.4"
+    redcard_engine_version "rbx", "1.2.4"
     expect { require 'redcard/rubinius/2.0' }.to raise_error(RedCard::InvalidRubyError)
   end
 end

@@ -11,17 +11,17 @@ describe "Ruby engine requirement" do
   end
 
   it "succeeds if RUBY_ENGINE is 'maglev'" do
-    redcard_engine "maglev"
+    redcard_engine_version "maglev", "1.0.0"
     expect { require 'redcard/maglev' }.not_to raise_error
   end
 
   it "raises an InvalidRubyEngineError if RUBY_ENGINE is 'topaz'" do
-    redcard_engine "topaz"
+    redcard_engine_version "topaz", "1.0.0"
     expect { require 'redcard/maglev' }.to raise_error(RedCard::InvalidRubyEngineError)
   end
 
   it "raises an InvalidRubyEngineError if RUBY_ENGINE is 'rbx'" do
-    redcard_engine "rbx"
+    redcard_engine_version "rbx", "1.0.0"
     expect { require 'redcard/maglev' }.to raise_error(RedCard::InvalidRubyEngineError)
   end
 end

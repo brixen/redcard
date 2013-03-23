@@ -64,7 +64,7 @@ describe "RedCard.verify" do
 
     context "when RUBY_ENGINE is 'rbx'" do
       before do
-        redcard_engine "rbx"
+        redcard_engine_version "rbx", "1.0.0"
       end
 
       it "returns nil for '1.9', :rbx" do
@@ -77,7 +77,7 @@ describe "RedCard.verify" do
 
       context "when Rubinius::VERSION is '2.0.0'" do
         before do
-          redcard_engine_version "2.0.0"
+          redcard_engine_version "rbx", "2.0.0"
         end
 
         it "returns nil for '1.9', :rbx => '2.0'" do
@@ -97,7 +97,7 @@ describe "RedCard.verify" do
 
   context "when RUBY_ENGINE is 'rbx'" do
     before do
-      redcard_engine "rbx"
+      redcard_engine_version "rbx", "1.0.0"
     end
 
     it "returns nil for :rbx" do

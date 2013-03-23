@@ -11,30 +11,26 @@ describe "MagLev version requirement" do
   end
 
   it "succeeds if RUBY_ENGINE is 'maglev' and MAGLEV_VERSION is greater than or equal to 1.1" do
-    redcard_engine "maglev"
     redcard_version "1.8.7"
-    redcard_engine_version "1.1.0"
+    redcard_engine_version "maglev", "1.1.0"
     expect { require 'redcard/maglev/1.1' }.not_to raise_error
   end
 
   it "raises an InvalidRubyEngineError if RUBY_ENGINE is 'topaz'" do
-    redcard_engine "topaz"
     redcard_version "1.8.7"
-    redcard_engine_version "1.1.0"
+    redcard_engine_version "topaz", "1.1.0"
     expect { require 'redcard/maglev/1.1' }.to raise_error(RedCard::InvalidRubyError)
   end
 
   it "raises an InvalidRubyEngineError if RUBY_ENGINE is 'rbx'" do
-    redcard_engine "rbx"
     redcard_version "1.8.7"
-    redcard_engine_version "1.1.0"
+    redcard_engine_version "rbx", "1.1.0"
     expect { require 'redcard/maglev/1.1' }.to raise_error(RedCard::InvalidRubyError)
   end
 
   it "raises an InvalidEngineVersionError if MAGLEV_VERSION is less than 1.1" do
-    redcard_engine "maglev"
     redcard_version "1.8.7"
-    redcard_engine_version "1.0.0"
+    redcard_engine_version "maglev", "1.0.0"
     expect { require 'redcard/maglev/1.1' }.to raise_error(RedCard::InvalidRubyError)
   end
 end
@@ -53,16 +49,14 @@ describe "MagLev's Ruby-version dependency" do
   end
 
   it "succeeds if MAGLEV_VERSION is 1.1 and RUBY_VERSION is not greater than 1.8" do
-    redcard_engine "maglev"
     redcard_version "1.8.7"
-    redcard_engine_version "1.1.0"
+    redcard_engine_version "maglev", "1.1.0"
     expect { require 'redcard/maglev/1.1' }.not_to raise_error
  end
 
   it "raises an InvalidRubyVersionError if MAGLEV_VERSION is 1.1 and RUBY_VERSION is greater than 1.8" do
-    redcard_engine "maglev"
     redcard_version "1.9.3"
-    redcard_engine_version "1.1.0"
+    redcard_engine_version "maglev", "1.1.0"
     expect { require 'redcard/maglev/1.1' }.to raise_error(RedCard::InvalidRubyVersionError)
  end
 

@@ -29,9 +29,7 @@ class RedCard
     when "jruby"
       Object.const_get :JRUBY_VERSION
     when "maglev"
-      if defined?(::Maglev)
-        Object.const_get(:MAGLEV_VERSION)
-      end
+      Object.const_get :MAGLEV_VERSION
     when "rbx"
       if defined?(::Rubinius)
         Object.const_get(:Rubinius).const_get(:VERSION)
