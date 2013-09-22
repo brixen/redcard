@@ -37,7 +37,7 @@ The following examples illustrate `RedCard.verify`:
 RedCard.verify :rubinius, :jruby
 
 # Requires Ruby language 1.9 and MRI or Rubinius
-RedCard.verify :mri, :rubinius, "1.9"
+RedCard.verify :ruby, :rubinius, "1.9"
 
 # Requires Ruby language 1.9.3 or 2.0
 RedCard.verify "1.9.3", "2.0"
@@ -61,7 +61,7 @@ if RedCard.check :rubinius
   # Use Rubinius-specific features
 end
 
-if RedCard.check :mri, :rubinius, "1.9"
+if RedCard.check :ruby, :rubinius, "1.9"
   # Use Ruby language 1.9 features on MRI or Rubinius
 end
 
