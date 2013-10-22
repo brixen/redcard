@@ -71,7 +71,7 @@ class RedCard
       [Engine.new(RedCard.engine, e), Version.new(RedCard.engine_version, v)]
     end
 
-    if @engine_versions.empty? || valid_engine_and_version?
+    if @engine_versions.empty? or valid_engine_and_version?
       block_given? ? (yield) : (return true)
     end
 
