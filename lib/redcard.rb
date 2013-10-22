@@ -7,8 +7,8 @@ class RedCard
   class UnknownRubyEngineError < Exception; end
   class InvalidRubyError < Exception; end
 
-  def self.check(*requirements)
-    new(*requirements).check
+  def self.check(*requirements, &block)
+    new(*requirements).check(&block)
   end
 
   def self.verify(*requirements)
@@ -67,14 +67,12 @@ class RedCard
       return false
     end
 
-    return true if @engine_versions.empty?
-
     @engine_versions.map! do |e, v|
       [Engine.new(RedCard.engine, e), Version.new(RedCard.engine_version, v)]
     end
 
-    return true if @engine_versions.any? do |engine, version|
-      engine.valid? and version.valid?
+    if @engine_versions.empty? || valid_engine_and_version?
+      block_given? ? (yield) : (return true)
     end
 
     invalid_engine_version
@@ -82,6 +80,12 @@ class RedCard
   end
 
   private
+
+  def valid_engine_and_version?
+    @engine_versions.any? do |engine, version|
+      engine.valid? and version.valid?
+    end
+  end
 
   def invalid_ruby_version
     @error = InvalidRubyVersionError
