@@ -14,6 +14,12 @@ describe "RedCard.check" do
       redcard_version "2.10.1"
     end
 
+    it "yields a block" do
+      yielded = false
+      RedCard.check("2.0") { yielded = true }
+      expect(yielded).to be_true
+    end
+
     it "returns true for '2.0'" do
       expect(RedCard.check("2.0")).to be_true
     end
